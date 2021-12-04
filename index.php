@@ -6,7 +6,7 @@
 		echo"connection";
 	}
 
-	mysqli_select_db($con,'quizdb');
+	mysqli_select_db($con,'quizdatabase');
 
 ?>
 
@@ -24,6 +24,8 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	 <link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans" rel="stylesheet">
+	 <link href="css.sweetalert.css" rel="stylesheet">
+<script src="js.sweetalert.min.js" ></script>
 <!-- 
 	 font-family: 'Montserrat', sans-serif; 
 	font-family: 'Open Sans', sans-serif;
@@ -51,6 +53,7 @@
 							<input type="text" name="pass" id="pass" class="form-control">
 						</div>
 						<button class="btn btn-success d-block m-auto" type="submit"> Ingresar </button>
+						
 					</form>
 				
 				</div>

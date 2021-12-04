@@ -1,14 +1,14 @@
 <?php
    session_start();
    
-   if(!isset($_SESSION['username'])){
+   if(!isset($_SESSION['name'])){
    	header('location:index.php');
    }
    
    
    $con = mysqli_connect('localhost','root');
   
-   	mysqli_select_db($con,'quizdb');
+   	mysqli_select_db($con,'quizdatabase');
    
    ?>
 <!DOCTYPE html>
@@ -42,35 +42,24 @@
    </head>
    <body>
 
-      <?php 
-
-      $page1 = $_GET['page'];
-
-      if($page1=="" ||  $page1==1){
-         $page1 = 0;
-      } else{
-         $page1 = (($page1 * 1)-1);
-
-      }
-
-      ?>
+      
 
       <div>
        <!--   <h1 class="text-center text-white font-weight-bold text-uppercase bg-dark" >  Complete Quiz Website using PHP and MYSQL using Session</h1><br>
       <div class="container "><br> -->
-         <h1 class="text-center text-white font-weight-bold text-uppercase bg-dark" >  Complete Quiz Website using PHP and MYSQL using Session </h1><br>
+         <h1 class="text-center text-white font-weight-bold text-uppercase bg-dark" >  Examen de Aplicaciones Moviles </h1><br>
       <div class="container "><br>
          <div class="container">
          
             <!-- <h1 class="text-center text-success text-uppercase animateuse" >  ThapaTechnical  Webdeveloper Quiz </h1>
             <br> -->
             <div class=" col-lg-12 text-center">
-               <h3> <a href="#" class="text-uppercase text-warning"> <?php echo $_SESSION['username']; ?>,</a> Welcome to ThapaTechnical Quiz </h3>
+               <h3> <a href="#" class="text-uppercase text-warning"> <?php echo $_SESSION['name']; ?>,</a> BIENVENIDO AL EXAMEN </h3>
             </div>
             <br>
             <div class="col-lg-8 d-block m-auto bg-light quizsetting ">
                <div class="card">
-                  <p class="card-header text-center" > <?php echo $_SESSION['username']; ?>, you have to select only one out of 4. Best of Luck <i class="fas fa-thumbs-up"></i>	 </p>
+                  <p class="card-header text-center" > <?php echo $_SESSION['name']; ?>, selecciona una de las 4 opciones. Suerte <i class="fas fa-thumbs-up"></i>	 </p>
                </div>
                <br>
                <form action="checked.php" method="post">
@@ -80,7 +69,7 @@
                   
                      $ansid = $i;
 
-                     $sql1 = "SELECT * FROM `questions` WHERE `q_id` = $i ";
+                     $sql1 = "SELECT * FROM `question` WHERE `quid` = $i ";
                      	$result1 = mysqli_query($con, $sql1);
                      		if (mysqli_num_rows($result1) > 0) {
                      						while($row1 = mysqli_fetch_assoc($result1)) {
@@ -91,14 +80,16 @@
                      <p class="card-header">  <?php echo $i ." : ". $row1['question']; ?> </p>
                     
                      <?php
-                        $sql = "SELECT * FROM `answers` WHERE `q_id` = $i limit $page1, 1";
+                        $sql = "SELECT * FROM `answers` WHERE `ans_id` = $i ";
                         	$result = mysqli_query($con, $sql);
                         		if (mysqli_num_rows($result) > 0) {
                         						while($row = mysqli_fetch_assoc($result)) {
                         	?>	
                            
                      <div class="card-block">
-                        <input type="radio" name="quizcheck[<?php echo $ansid; ?>]" id="<?php echo $ansid; ?>" value="<?php echo $row['a_id']; ?>" > <?php echo $row['ans']; ?> 
+                        <input type="radio" name="quizcheck[<?php echo $row['ans_id']; ?>" 
+                        value="<?php echo $rows['aid']; ?>">
+                        <?php echo $row['answer']; ?> 
                         <br>
                      </div>
                      <?php
@@ -120,7 +111,7 @@
          </div>
          <br>
          <footer>
-            <h5 class="text-center"> &copy2018 ThapaTechnical </h5> 
+            <h5 class="text-center"> Desarrollo de aplicaciones moviles II </h5> 
          </footer>
       </div>
 
@@ -128,7 +119,7 @@
       <?php
 
       $startlimit  = 0;
-      $q =" select q_id from answers";
+      $q =" select quid from question";
       $query = mysqli_query($con,$q);
       $lastpage = mysqli_num_rows($query);
 

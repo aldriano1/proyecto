@@ -1,3 +1,15 @@
+<<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<link href="css.sweetalert.css" rel="stylesheet">
+<script src="js.sweetalert.min.js" ></script>
+</head>
+<body>
+
+</body>
+</html>
 <?php
 
 session_start();
@@ -15,7 +27,8 @@ $con = mysqli_connect('localhost','root');
 
 	$username = $_POST['user'];
 	$password = $_POST['pass'];
-	
+	$_GET['user'];
+	$_GET['pass'];
 
 	// echo $username;
 	// echo $password;
@@ -28,12 +41,15 @@ $con = mysqli_connect('localhost','root');
 
 	 $row = mysqli_num_rows($resultcheck);
 			if($row == 1){
-			$_SESSION['name'] = $username;
-			header('location:home.php');
-				
-			}	else{
 
-				header('location:home.php');
+			$_SESSION['name'] = $username;
+			
+			header('location:home.php');
+			
+			}	else{
+				swal("acceso denegado");
+
+				header('location:index.php');
 
 			}
 
